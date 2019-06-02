@@ -1,0 +1,8 @@
+{
+  "name": "neardb-zeit",
+  "dependencies": {
+    "@zeit/integration-utils": "latest",
+    "micro": "^9.3.4",
+    "zeit-api-client": "^0.0.4"
+  }
+}
