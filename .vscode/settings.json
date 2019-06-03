@@ -1,11 +1,15 @@
 {
     "cSpell.words": [
+        "digitalocean",
         "downlevel",
         "iteration",
         "minio",
         "neardb",
+        "postgre",
         "server",
+        "slugify",
         "sourcemap",
+        "sql",
         "tslib"
     ]
 }

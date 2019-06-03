@@ -15,7 +15,7 @@ array-flatten@1.1.1:
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
   integrity sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=
 
-aws-sdk@^2.402.0, aws-sdk@^2.466.0:
+aws-sdk@^2.466.0:
   version "2.466.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.466.0.tgz#02d819c5af058e15fd1942296ed3b1def9f4b14d"
   integrity sha512-dWFpz774ONjP1Cb19VkLOfQSVTu5p5/uncZGovAe71NOfPGDSvrQKXOsKcuI1/k4oJyKW9z/GATF8ht8DkDWGg==
@@ -304,12 +304,12 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-neardb@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/neardb/-/neardb-0.2.0.tgz#36d4babc33dddea01de23d4d5679fd033f78c132"
-  integrity sha512-bvgpk1HHaRwlAqOywUWnBZKSyy+VBHeHTRyfjAV84E/n8XSgDa/K15v7+fyT1GDTT0kmZsMdwRL5r+hZdVqqBw==
+neardb@3.0.0-beta-0:
+  version "3.0.0-beta-0"
+  resolved "https://registry.yarnpkg.com/neardb/-/neardb-3.0.0-beta-0.tgz#129cdc56690bab410bb22e33c9ecfa823891e79f"
+  integrity sha512-tEgJ38Li/CsirwfBDU9qw3NNZnQfgKdaHC43C/T49Eb6grvFhhuVDPg8fTMGYsNpdUQog+GfXusmwG8tv4yuEw==
   dependencies:
-    aws-sdk "^2.402.0"
+    aws-sdk "^2.466.0"
     axios "^0.18.0"
 
 negotiator@0.6.2:
@@ -347,7 +347,7 @@ punycode@1.3.2:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
   integrity sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=
 
-qs@6.7.0:
+qs@6.7.0, qs@^6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==

@@ -1,12 +1,7 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-
+// @ts-nocheck
+const { parse } = require("url");
 const S3Adapter = require("neardb/dist/adapters/s3");
-
-const app = express();
-module.exports = app;
-
-app.use(bodyParser.json());
+const qs = require("qs");
 
 const s3 = S3Adapter.S3Adapter.init({
   storage: {
@@ -20,46 +15,84 @@ const s3 = S3Adapter.S3Adapter.init({
   }
 });
 
-app.get("*", async (req, res, next) => {
-  try {
-    let payload = await s3.get(JSON.parse(req.query.path));
+module.exports = async (req, res) => {
+  const { query } = parse(req.url, true);
+  const { path } = query;
 
-    res.json(payload);
-  } catch (err) {
-    next(err);
-  }
-});
+  console.log("=====>", JSON.parse(JSON.stringify(path)).path);
+  console.log(typeof path);
 
-app.post("*", async (req, res, next) => {
-  if (req.body == null) {
-    return res.status(400).send({ error: "no JSON object in the request" });
+  switch (req.method) {
+    case "POST":
+      try {
+        let payload = await s3.set(req.body, JSON.parse(path).path);
+        res.end(payload);
+      } catch (err) {
+        throw err;
+      }
+      break;
+    case "GET":
+      // code block
+      break;
+    case "PUT":
+      // code block
+      break;
+    case "DELETE":
+      // code block
+      break;
+    default:
+      res.end(`Oops something went wrong!`);
   }
+};
 
-  try {
-    let payload = await s3.set(req.body, JSON.parse(req.query.path));
-    res.json(payload);
-  } catch (err) {
-    next(err);
-  }
-});
+// const express = require("express");
+// const bodyParser = require("body-parser");
 
-app.put("*", async (req, res, next) => {
-  if (req.body == null) {
-    return res.status(400).send({ error: "no JSON object in the request" });
-  }
-  try {
-    let payload = await s3.update(req.body, JSON.parse(req.query.path));
-    res.json(payload);
-  } catch (err) {
-    next(err);
-  }
-});
+// const app = express();
+// module.exports = app;
 
-app.delete("*", async (req, res, next) => {
-  try {
-    let payload = await s3.remove(JSON.parse(req.query.path));
-    res.json(payload);
-  } catch (err) {
-    next(err);
-  }
-});
+// app.use(bodyParser.json());
+
+// app.get("*", async (req, res, next) => {
+//   try {
+//     let payload = await s3.get(JSON.parse(req.query.path));
+
+//     res.json(payload);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// app.post("*", async (req, res, next) => {
+//   if (req.body == null) {
+//     return res.status(400).send({ error: "no JSON object in the request" });
+//   }
+
+//   try {
+//     let payload = await s3.set(req.body, JSON.parse(req.query.path));
+//     res.json(payload);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// app.put("*", async (req, res, next) => {
+//   if (req.body == null) {
+//     return res.status(400).send({ error: "no JSON object in the request" });
+//   }
+//   try {
+//     let payload = await s3.update(req.body, JSON.parse(req.query.path));
+//     res.json(payload);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// app.delete("*", async (req, res, next) => {
+//   try {
+//     let payload = await s3.remove(JSON.parse(req.query.path));
+//     res.json(payload);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
