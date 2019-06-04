@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "name": "neardb-serverless",
+    "builds": [
+      { "src": "www/**/*", "use": "@now/static" },
+      { "src": "api/**/*.js", "use": "@now/node" }
+    ],
+    "routes": [{ "src": "/", "dest": "api/index.js" }]
+  }
+  
