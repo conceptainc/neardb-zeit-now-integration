@@ -4,6 +4,8 @@ const { distanceInWordsToNow, format } = require("date-fns");
 const { groupBy, sortDescending } = require("../lib/utils.js");
 const instanceView = require("./instanceView");
 
+const DEBUG = false;
+
 module.exports = async function dashboardView(viewInfo) {
   const { payload, metadata, zeitClient } = viewInfo;
   const { action, clientState } = payload;
@@ -11,7 +13,7 @@ module.exports = async function dashboardView(viewInfo) {
 
   let options = {
     query: {
-      neardbDeployment: "active"
+      "meta-neardbDeployment": "active"
     }
   };
 
@@ -23,6 +25,10 @@ module.exports = async function dashboardView(viewInfo) {
 
   if (action === "create-instance") {
     return instanceView(viewInfo);
+  }
+
+  function showDebug(debug) {
+    if (debug === false) return "none";
   }
 
   function renderStatus(state) {
@@ -59,14 +65,23 @@ module.exports = async function dashboardView(viewInfo) {
         `;
     }
     return htm`
+      <Box display="${showDebug(DEBUG)}">
+        <Code>
+          ${JSON.stringify(listInstances, null, 2)}
+        </Code>
+      </Box>
         <Container>
             ${keys.map(k => {
               instances[k].sort(sortDescending);
+              instances[k].length = 1;
               return htm`
                 <Box background-color="white" margin-bottom="20px" padding="20px">          
                     <Box display="flex" flex-direction="row" justify-content="space-between" align-items="center" padding-bottom="20px"> 
                         <Box display="flex" flex-direction="row" align-items="center">
                             <Box margin-right="15px"><H2>${k}</H2></Box>
+                            <Button small secondary>View Deployments</Button>
+                            <Box width="10px"/>
+                            <Button small secondary>Aliases</Button>
                         </Box>
                         <Box margin-left="20px" font-size="12px" color="#777"> Updated: ${format(
                           instances[k][0].created,
